@@ -1,0 +1,16 @@
+name: Homes
+version: '1.0-BETA'
+main: com.minerail.homes.Homes
+api-version: '1.20'
+load: STARTUP
+depend: [WorldGuard]
+commands:
+  sethome:
+    usage: /sethome
+  delhome:
+  home:
+  request:
+  accept:
+  homes:
+  hreload:
+

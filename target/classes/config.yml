@@ -1,0 +1,95 @@
+Settings:
+  PluginSettings:
+    Teleport:
+      enabled: true
+      delay-ticks:  60 #60 ticks = 3 seconds | 100 ticks = 5 seconds | 300 ticks = 15 seconds | max 600 ticks = 30 seconds
+    Commands:
+      Request:
+        auto-cancel:
+          enabled: true
+          time-ticks: 1200 #max 6000 ticks = 5 minutes
+    
+  Gui:
+    enabled: true
+    displayName: 'Your homes'
+    home-item: 'FEATHER'
+    rows: 2
+    pages: false
+    page-size: 9
+
+  #You need to set the limit of additional homes with permission
+  #For example: homes.additional.3
+  PlotSquared:
+    enabled: true
+    additional-homes-max: 5
+    max: 30
+
+  WorldGuard:
+    enabled: true
+    #PROTECTIONSTONES = Choosing this you can block uninvited guests from setting homes on players plots and checking ignored-regions
+    #DEFAULT = It's checking only blacklisted-regions and whitelisted-regions
+    secure-type: DEFAULT
+    #If you want to use that, you need to add for admin permissions homes.bypass.regions
+    bypassForAdmins: true
+    regions:
+      blacklisted-regions:
+        - 'example'
+      whitelisted-regions:
+        - 'example'
+      #Only in PROTECTIONSTONES secure type
+      ignored-regions:
+        - 'spawn'
+
+  #You can set the limit using permissions
+  #example: homes.limit.bypass, homes.limit.2
+  Limits:
+    enabled: true
+    bypassForAdmins: true
+    #This option is responsible for the number of repetitions of checking the player's permissions. !! Enter carefully!!
+    #It's best to leave the default value
+    max: 100
+
+  #<sender> = Command Sender
+  #<home> = home
+  #<homes> = list of player homes
+  #<arg> = argument
+  #Rember! You need to use the following format from https://docs.advntr.dev/minimessage/format.html
+  Messages:
+    prefix: '<blue>Homes <yellow>><reset> '
+    errorMessage: 'There is an error occured! Please contact the administration of this server '
+    MissingPermission: 'Unknown command.'
+    reloadMessage: 'Plugin successfully realoaded!'
+    createHome:
+      success: 'Created home!'
+      deniedToSetHomeIfPlayerIsNotMember: 'Denied to use this command! Please send request to owner of this region.' #PROTECTIONSTONES
+      deniedToSethome: 'You are not allowed to create home here' #DEFAULT
+      limitReached: 'You cannot set more homes.'
+      homeExists: 'This home already exists, please type different name of home.'
+    deleteHome:
+      success: 'Deleted!'
+      homeNotExist: 'Home not found, if home exists please contact to administration.'
+    request:
+      requestSentToSender: 'You cannot send a request to yourself.'
+      requestSent: 'Request sent!'
+      requestAlreadySent: 'You already sent request! Wait for agreement from <arg>'
+      errorIfOwnerIsOffline: 'Player is offline, command canceled.'
+      toCuboidOwner: 'Player <sender> sent to you request for set home. Use /accept <sender> true to accept his request.'
+      auto-cancel-to-sender: 'Your request was automatically canceled.'
+      auto-cancel-to-owner: 'Request from <sender> was automatically canceled'
+      MissingArguments: 'Missing arguments, please specify player name'
+    accept:
+      acceptedToAsker: 'Player <sender> accepted your request.'
+      noAgreementToAsker: 'Player <sender> denied your request.'
+      successToCommandSender: 'Accepted request of <arg>'
+      noAgreementToCommandSender: 'Denied request of <arg>'
+      MissingArguments: 'You need to provide a player and choose <aqua>true <reset>or <aqua>false'
+    home:
+      delay: 'You need to wait for teleportation, please do not move.'
+      player-moved: 'Teleportation cancelled, you moved.'
+      tpMessage: 'You were teleported to <home>'
+      homeNotExist: 'You do not have that home!'
+    homes:
+      show-homes: 'Your homes: <homes>'
+      empty: 'You do not have any homes.'
+
+Config-version: 1.0.3
