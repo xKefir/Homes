@@ -22,7 +22,6 @@ Settings:
   PlotSquared:
     enabled: true
     additional-homes-max: 5
-    max: 30
 
   WorldGuard:
     enabled: true
@@ -38,7 +37,7 @@ Settings:
         - 'example'
       #Only in PROTECTIONSTONES secure type
       ignored-regions:
-        - 'spawn'
+        - 'exampleregion'
 
   #You can set the limit using permissions
   #example: homes.limit.bypass, homes.limit.2

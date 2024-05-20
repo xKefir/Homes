@@ -1,7 +1,8 @@
 package com.minerail.homes.utils;
 
-import com.minerail.homes.commands.*;
 import java.io.IOException;
+
+import com.minerail.homes.dependency.WorldGuardHook;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentBuilder;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -10,91 +11,81 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static com.minerail.homes.dependencies.Worldguard.plugin;
-
 public class ConfigUtils {
-    DataUtils fileManager = new DataUtils(this);
+    private ConfigUtils configUtils;
+    public ConfigUtils() {}
+    public void setConfigUtils(ConfigUtils configUtils) {
+        this.configUtils = configUtils;
+    }
+    private DataUtils dataUtils;
+    private WorldGuardHook worldGuardHook;
 
-    public static String errorMessage;
+    public String errorMessage;
 
-    public static String missingPermission;
+    public String missingPermission;
 
-    public static String rlMessage;
+    public String rlMessage;
 
-    public static String create_home_success;
+    public String create_home_success;
 
-    public static String errorIfPlayerIsNot;
+    public String errorIfPlayerIsNot;
 
-    public static String deniedToSethome;
+    public String deniedToSethome;
 
-    public static String limitReachedWhileCreatingHome;
+    public String limitReachedWhileCreatingHome;
 
-    public static String existingHome;
+    public String existingHome;
 
-    public static String homeSuccessfullyDeleted;
+    public String homeSuccessfullyDeleted;
 
-    public static String homeNotExists;
+    public String homeNotExists;
 
-    public static String requestSendedToSender;
+    public String requestSendedToSender;
 
-    public static String requestSended;
+    public String requestSended;
 
-    public static String requestAlreadySent;
+    public String requestAlreadySent;
 
-    public static String errorIfOwnerOffline;
+    public String errorIfOwnerOffline;
 
-    public static String toCuboidOwner;
+    public String toCuboidOwner;
 
-    public static String autoCancelSender;
+    public String autoCancelSender;
 
-    public static String autoCancelOwner;
+    public String autoCancelOwner;
 
-    public static String missingArgsRequest;
+    public String missingArgsRequest;
 
-    public static String acceptedToAsker;
+    public String acceptedToAsker;
 
-    public static String noAgreementToAsker;
+    public String noAgreementToAsker;
 
-    public static String successToCommandSender;
+    public String successToCommandSender;
 
-    public static String noAgreementToCommandSender;
+    public String noAgreementToCommandSender;
 
-    public static String missingArgumentsAccept;
+    public String missingArgumentsAccept;
 
-    public static String tpdelay;
+    public String tpdelay;
 
-    public static String playerMoved;
+    public String playerMoved;
 
-    public static String teleportedPlayer;
+    public String teleportedPlayer;
 
-    public static String homeNotExistsWhileTp;
+    public String homeNotExistsWhileTp;
 
-    public static String homesList;
+    public String homesList;
 
-    public static String homesListIsEmpty;
+    public String homesListIsEmpty;
 
-    public ConfigUtils(ReloadCmd reloadCmd) {}
 
-    public ConfigUtils(Sethome sethome) {}
-
-    public ConfigUtils(DataUtils dataUtils) {}
-
-    public ConfigUtils(Home home) {}
-
-    public ConfigUtils(Delhome delhome) {}
-
-    public ConfigUtils(ShowHomes showHomes) {}
-
-    public ConfigUtils(Request request) {}
-
-    public ConfigUtils(Accept accept) {}
 
     public void reloadConfig() throws IOException, InvalidConfigurationException {
-        this.fileManager.setupConfigFiles();
+        dataUtils.setupConfigFiles();
     }
 
     public boolean wgEnabled() {
-        Boolean wg =DataUtils.config.getBoolean("Settings.WorldGuard.enabled");
+        Boolean wg = dataUtils.config.getBoolean("Settings.WorldGuard.enabled");
         if (wg) {
             return true;
         } else {
@@ -103,7 +94,7 @@ public class ConfigUtils {
     }
 
     public boolean limitsEnabled() {
-        Boolean limit = DataUtils.config.getBoolean("Settings.Limits.enabled");
+        Boolean limit = dataUtils.config.getBoolean("Settings.Limits.enabled");
         if (limit) {
             return true;
         } else {
@@ -112,7 +103,7 @@ public class ConfigUtils {
     }
 
     public boolean homesGuiEnabled() {
-        Boolean gui = DataUtils.config.getBoolean("Settings.Gui.enabled");
+        Boolean gui = dataUtils.config.getBoolean("Settings.Gui.enabled");
         if (gui) {
             return true;
         } else {
@@ -122,15 +113,15 @@ public class ConfigUtils {
 
     @NotNull
     public String getPrefix() {
-        if (DataUtils.config.getString("Settings.Messages.prefix") != null) {
-            return DataUtils.config.getString("Settings.Messages.prefix");
+        if (dataUtils.config.getString("Settings.Messages.prefix") != null) {
+            return dataUtils.config.getString("Settings.Messages.prefix");
         } else {
             return "";
         }
     }
 
     public int getPlayerLimits(Player p) {
-        int max = DataUtils.config.getInt("Settings.Limits.max");
+        int max = dataUtils.config.getInt("Settings.Limits.max");
         int limit = 0;
         if (limitsEnabled()) {
             if (!p.hasPermission("homes.limit.bypass")) {
@@ -148,36 +139,36 @@ public class ConfigUtils {
     }
 
     public void buildTexts() {
-        errorMessage = getPrefix() + DataUtils.config.getString("Settings.Messages.errorMessage");
-        missingPermission = getPrefix() + DataUtils.config.getString("Settings.Messages.MissingPermission");
-        rlMessage = getPrefix() + DataUtils.config.getString("Settings.Messages.reloadMessage");
-        create_home_success = getPrefix() + DataUtils.config.getString("Settings.Messages.createHome.success");
-        errorIfPlayerIsNot = getPrefix() + DataUtils.config.getString("Settings.Messages.createHome.deniedToSetHomeIfPlayerIsNotMember");
-        deniedToSethome = getPrefix() + DataUtils.config.getString("Settings.Messages.createHome.deniedToSetHome");
-        limitReachedWhileCreatingHome = getPrefix() + DataUtils.config.getString("Settings.Messages.createHome.limitReached");
-        existingHome = getPrefix() + DataUtils.config.getString("Settings.Messages.createHome.homeExists");
-        homeSuccessfullyDeleted = getPrefix() + DataUtils.config.getString("Settings.Messages.deleteHome.success");
-        homeNotExists = getPrefix() + DataUtils.config.getString("Settings.Messages.deleteHome.homeNotExist");
-        requestSendedToSender = getPrefix() + DataUtils.config.getString("Settings.Messages.request.requestSentToSender");
-        requestSended = getPrefix() + DataUtils.config.getString("Settings.Messages.request.requestSent");
-        requestAlreadySent = getPrefix() + DataUtils.config.getString("Settings.Messages.request.requestAlreadySent");
-        errorIfOwnerOffline = getPrefix() + DataUtils.config.getString("Settings.Messages.request.errorIfOwnerIsOffline");
-        toCuboidOwner = getPrefix() + DataUtils.config.getString("Settings.Messages.request.toCuboidOwner");
-        autoCancelSender = getPrefix() + DataUtils.config.getString("Settings.Messages.request.auto-cancel-to-sender");
-        autoCancelOwner = getPrefix() + DataUtils.config.getString("Settings.Messages.request.auto-cancel-to-owner");
-        missingArgsRequest = getPrefix() + DataUtils.config.getString("Settings.Messages.request.MissingArguments");
-        acceptedToAsker = getPrefix() + DataUtils.config.getString("Settings.Messages.accept.acceptedToAsker");
-        noAgreementToAsker = getPrefix() + DataUtils.config.getString("Settings.Messages.accept.noAgreementToAsker");
-        successToCommandSender = getPrefix() + DataUtils.config.getString("Settings.Messages.accept.successToCommandSender");
-        noAgreementToCommandSender = getPrefix() + DataUtils.config.getString("Settings.Messages.accept.noAgreementToCommandSender");
-        missingArgumentsAccept = getPrefix() + DataUtils.config.getString("Settings.Messages.accept.MissingArguments");
-        tpdelay = getPrefix() + DataUtils.config.getString("Settings.Messages.home.delay");
-        playerMoved = getPrefix() + DataUtils.config.getString("Settings.Messages.home.player-moved");
-        teleportedPlayer = getPrefix() + DataUtils.config.getString("Settings.Messages.home.tpMessage");
-        homeNotExistsWhileTp = getPrefix() + DataUtils.config.getString("Settings.Messages.home.homeNotExist");
-        homesList = getPrefix() + DataUtils.config.getString("Settings.Messages.homes.show-homes");
-        homesListIsEmpty = getPrefix() + DataUtils.config.getString("Settings.Messages.homes.empty");
-        plugin.getLogger().info("Messages successfully loaded");
+        errorMessage = getPrefix() + dataUtils.config.getString("Settings.Messages.errorMessage");
+        missingPermission = getPrefix() + dataUtils.config.getString("Settings.Messages.MissingPermission");
+        rlMessage = getPrefix() + dataUtils.config.getString("Settings.Messages.reloadMessage");
+        create_home_success = getPrefix() + dataUtils.config.getString("Settings.Messages.createHome.success");
+        errorIfPlayerIsNot = getPrefix() + dataUtils.config.getString("Settings.Messages.createHome.deniedToSetHomeIfPlayerIsNotMember");
+        deniedToSethome = getPrefix() + dataUtils.config.getString("Settings.Messages.createHome.deniedToSetHome");
+        limitReachedWhileCreatingHome = getPrefix() + dataUtils.config.getString("Settings.Messages.createHome.limitReached");
+        existingHome = getPrefix() + dataUtils.config.getString("Settings.Messages.createHome.homeExists");
+        homeSuccessfullyDeleted = getPrefix() + dataUtils.config.getString("Settings.Messages.deleteHome.success");
+        homeNotExists = getPrefix() + dataUtils.config.getString("Settings.Messages.deleteHome.homeNotExist");
+        requestSendedToSender = getPrefix() + dataUtils.config.getString("Settings.Messages.request.requestSentToSender");
+        requestSended = getPrefix() + dataUtils.config.getString("Settings.Messages.request.requestSent");
+        requestAlreadySent = getPrefix() + dataUtils.config.getString("Settings.Messages.request.requestAlreadySent");
+        errorIfOwnerOffline = getPrefix() + dataUtils.config.getString("Settings.Messages.request.errorIfOwnerIsOffline");
+        toCuboidOwner = getPrefix() + dataUtils.config.getString("Settings.Messages.request.toCuboidOwner");
+        autoCancelSender = getPrefix() + dataUtils.config.getString("Settings.Messages.request.auto-cancel-to-sender");
+        autoCancelOwner = getPrefix() + dataUtils.config.getString("Settings.Messages.request.auto-cancel-to-owner");
+        missingArgsRequest = getPrefix() + dataUtils.config.getString("Settings.Messages.request.MissingArguments");
+        acceptedToAsker = getPrefix() + dataUtils.config.getString("Settings.Messages.accept.acceptedToAsker");
+        noAgreementToAsker = getPrefix() + dataUtils.config.getString("Settings.Messages.accept.noAgreementToAsker");
+        successToCommandSender = getPrefix() + dataUtils.config.getString("Settings.Messages.accept.successToCommandSender");
+        noAgreementToCommandSender = getPrefix() + dataUtils.config.getString("Settings.Messages.accept.noAgreementToCommandSender");
+        missingArgumentsAccept = getPrefix() + dataUtils.config.getString("Settings.Messages.accept.MissingArguments");
+        tpdelay = getPrefix() + dataUtils.config.getString("Settings.Messages.home.delay");
+        playerMoved = getPrefix() + dataUtils.config.getString("Settings.Messages.home.player-moved");
+        teleportedPlayer = getPrefix() + dataUtils.config.getString("Settings.Messages.home.tpMessage");
+        homeNotExistsWhileTp = getPrefix() + dataUtils.config.getString("Settings.Messages.home.homeNotExist");
+        homesList = getPrefix() + dataUtils.config.getString("Settings.Messages.homes.show-homes");
+        homesListIsEmpty = getPrefix() + dataUtils.config.getString("Settings.Messages.homes.empty");
+        worldGuardHook.plugin.getLogger().info("Messages successfully loaded");
     }
 
     public ComponentBuilder builder(String s, Player sender, String arg, String argument, String list) {

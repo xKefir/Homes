@@ -1,12 +1,12 @@
 com\minerail\homes\commands\Home.class
+com\minerail\homes\dependency\PlotSquaredHook.class
 com\minerail\homes\commands\Delhome.class
 com\minerail\homes\utils\HomesGui.class
+com\minerail\homes\dependency\WorldGuardHook.class
 com\minerail\homes\commands\Sethome.class
-com\minerail\homes\dependencies\Worldguard.class
 com\minerail\homes\Homes.class
 com\minerail\homes\utils\DataUtils.class
 com\minerail\homes\commands\Accept.class
-com\minerail\homes\dependencies\PlotSquaredAdditionalHomes.class
 com\minerail\homes\utils\ConfigUtils.class
 com\minerail\homes\commands\ShowHomes.class
 com\minerail\homes\commands\ReloadCmd.class

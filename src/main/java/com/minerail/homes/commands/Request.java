@@ -1,6 +1,6 @@
 package com.minerail.homes.commands;
 
-import com.minerail.homes.Homes;
+import com.minerail.homes.dependency.WorldGuardHook;
 import com.minerail.homes.utils.ConfigUtils;
 import com.minerail.homes.utils.DataUtils;
 import java.util.LinkedHashMap;
@@ -12,90 +12,79 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static com.minerail.homes.dependencies.Worldguard.plugin;
-
 public class Request implements CommandExecutor {
-    private Sethome sethome;
+    public Request() {}
+    private final DataUtils dataUtils = new DataUtils();
+    private final ConfigUtils configUtils = new ConfigUtils();
+    private final WorldGuardHook worldGuardHook = new WorldGuardHook();
+    private final Sethome sethome = new Sethome();
+    public Map<Player, Map> requestsDatabase = new LinkedHashMap<>();
 
-    private ConfigUtils configUtils;
+    public Map<Player, Boolean> requests = new LinkedHashMap<>();
 
+    public Map<Player, Player> sendedRequests = new LinkedHashMap<>();
 
-    private Accept accept;
+    public Map<Player, Boolean> requestsSent = new LinkedHashMap<>();
 
-    public Request(Sethome setHome) {}
+    public Map<Player, Location> locOfSendedRequest = new LinkedHashMap<>();
 
-    public Request(Homes homes) {}
-
-    public static Map<Player, Map> requestsDatabase = new LinkedHashMap<>();
-
-    public static Map<Player, Boolean> requests = new LinkedHashMap<>();
-
-    public static Map<Player, Player> sendedRequests = new LinkedHashMap<>();
-
-    public static Map<Player, Boolean> requestsSent = new LinkedHashMap<>();
-
-    public static Map<Player, Location> locOfSendedRequest = new LinkedHashMap<>();
-
-    public Request(Accept accept) {}
 
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
             Player p = (Player)sender;
-            this.sethome = new Sethome(this);
-            this.configUtils = new ConfigUtils(this);
-            this.accept = new Accept(this);
             if (args.length == 1) {
-                if (plugin.getServer().getPlayer(args[0]) != null) {
-                    Player arg = plugin.getServer().getPlayer(args[0]);
+                if (worldGuardHook.plugin.getServer().getPlayer(args[0]) != null) {
+                    Player arg = worldGuardHook.plugin.getServer().getPlayer(args[0]);
                     if (!requestsSent.containsKey(p)) {
                         sendedRequests.put(p, arg);
-                        requests.put(arg, Boolean.valueOf(true));
+                        requests.put(arg, true);
                         requestsDatabase.put(p, requests);
-                        requestsSent.put(p, Boolean.valueOf(true));
+                        requestsSent.put(p, true);
                         if (arg.isOnline()) {
                             if (!arg.equals(p)) {
-                                if (DataUtils.config.getBoolean("Settings.PluginSettings.Commands.Request.auto-cancel.enabled"))
-                                    if (DataUtils.config
-                                            .getInt("Settings.PluginSettings.Commands.Request.auto-cancel.time-ticks") <= 6000)
-                                        plugin.getServer().getScheduler().runTaskLater(plugin, task -> {
+                                if (dataUtils.config.getBoolean("Settings.PluginSettings.Commands.Request.auto-cancel.enabled")) {
+                                    if (dataUtils.config.getInt("Settings.PluginSettings.Commands.Request.auto-cancel.time-ticks") <= 6000) {
+                                        worldGuardHook.plugin.getServer().getScheduler().runTaskLater(worldGuardHook.plugin, task -> {
                                             if (requests.containsKey(arg)) {
                                                 clearData(p, arg);
-                                                p.sendMessage(configUtils.builder(ConfigUtils.autoCancelSender, null, null, null, null));
-                                                arg.sendMessage(configUtils.builder(ConfigUtils.autoCancelOwner, p, null, null, null));
+                                                p.sendMessage(configUtils.builder(configUtils.autoCancelSender, null, null, null, null));
+                                                arg.sendMessage(configUtils.builder(configUtils.autoCancelOwner, p, null, null, null));
                                             }
-                                        }, DataUtils.config.getInt("Settings.PluginSettings.Commands.Request.auto-cancel.time-ticks"));
-                                if (!Sethome.playerBooleanMap.containsKey(p)) {
-                                    if (!Sethome.playerBooleanMap.containsValue(Boolean.valueOf(false))) {
+                                        }, dataUtils.config.getInt("Settings.PluginSettings.Commands.Request.auto-cancel.time-ticks"));
+                                    }
+                                }
+                                if (!sethome.playerBooleanMap.containsKey(p)) {
+                                    if (!sethome.playerBooleanMap.containsValue(false)) {
                                         locOfSendedRequest.put(p, p.getLocation());
-                                        arg.sendMessage(configUtils.builder(ConfigUtils.toCuboidOwner, p, null, null, null));
-                                        p.sendMessage(configUtils.builder(ConfigUtils.requestSended, null, null, null, null));
+                                        arg.sendMessage(configUtils.builder(configUtils.toCuboidOwner, p, null, null, null));
+                                        p.sendMessage(configUtils.builder(configUtils.requestSended, null, null, null, null));
                                         return true;
                                     }
                                 } else {
-                                    arg.sendMessage(configUtils.builder(ConfigUtils.toCuboidOwner, p, null, null, null));
-                                    p.sendMessage(configUtils.builder(ConfigUtils.requestSended, null, null, null, null));
+                                    arg.sendMessage(configUtils.builder(configUtils.toCuboidOwner, p, null, null, null));
+                                    p.sendMessage(configUtils.builder(configUtils.requestSended, null, null, null, null));
                                     return true;
                                 }
                             } else {
                                 clearData(p, arg);
-                                p.sendMessage(configUtils.builder(ConfigUtils.requestSendedToSender, null, null, null, null));
+                                p.sendMessage(configUtils.builder(configUtils.requestSendedToSender, null, null, null, null));
                                 return true;
                             }
                         } else {
                             clearData(p, arg);
-                            p.sendMessage(configUtils.builder(ConfigUtils.errorIfOwnerOffline, p, null, null, null));
+                            p.sendMessage(configUtils.builder(configUtils.errorIfOwnerOffline, p, null, null, null));
                             return true;
                         }
                     } else {
-                        p.sendMessage(configUtils.builder(ConfigUtils.requestAlreadySent, null, arg.getName(), null, null));
+                        p.sendMessage(configUtils.builder(configUtils.requestAlreadySent, null, arg.getName(), null, null));
                         return true;
                     }
                 } else {
-                    p.sendMessage(configUtils.builder(ConfigUtils.errorIfOwnerOffline, p, null, null, null));
+                    p.sendMessage(configUtils.builder(configUtils.errorIfOwnerOffline, p, null, null, null));
                     return true;
                 }
             } else {
-                p.sendMessage(configUtils.builder(ConfigUtils.missingArgsRequest, null, null, null, null));
+                p.sendMessage(configUtils.builder(configUtils.missingArgsRequest, null, null, null, null));
                 return true;
             }
         }
@@ -103,7 +92,6 @@ public class Request implements CommandExecutor {
     }
 
     public void clearData(Player p, Player arg) {
-        this.sethome = new Sethome(this);
         locOfSendedRequest.remove(p);
         sethome.playerBooleanMap.remove(p);
         sethome.playerLocationMapForRequest.remove(p);

@@ -1,11 +1,5 @@
 package com.minerail.homes.utils;
 
-import com.minerail.homes.Homes;
-import com.minerail.homes.commands.Delhome;
-import com.minerail.homes.commands.Home;
-import com.minerail.homes.commands.Sethome;
-import com.minerail.homes.commands.ShowHomes;
-import com.minerail.homes.dependencies.Worldguard;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,50 +12,39 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 public class DataUtils {
+    private DataUtils dataUtils;
+    public DataUtils() {}
+    public void setDataUtils(DataUtils dataUtils) {
+        this.dataUtils = dataUtils;
+    }
     public Plugin plugin = Bukkit.getPluginManager().getPlugin("Homes");
 
-    public static YamlConfiguration config;
+    public YamlConfiguration config;
 
     private File file = new File(this.plugin.getDataFolder(), "config.yml");
 
-    public static YamlConfiguration data;
+    public YamlConfiguration data;
 
     private File dataFile = new File(this.plugin.getDataFolder(), "data.yml");
 
-    private ConfigUtils configUtils;
-
-    public DataUtils(Sethome sethome) {}
-
-    public DataUtils(Homes homes) {}
-
-    public DataUtils(Home home) {}
-
-    public DataUtils(ConfigUtils configUtils) {}
-
-    public DataUtils(Delhome delhome) {}
-
-    public DataUtils(ShowHomes showHomes) {}
-
-    public DataUtils(Worldguard worldguard) {}
 
 
 
     public void setupConfigFiles() throws IOException, InvalidConfigurationException {
-        this.configUtils = new ConfigUtils(this);
-        if (!this.file.exists()) {
-            this.plugin.saveResource("config.yml", false);
-            config = YamlConfiguration.loadConfiguration(this.file);
-            this.configUtils.buildTexts();
+        if (!file.exists()) {
+            plugin.saveResource("config.yml", false);
+            config = YamlConfiguration.loadConfiguration(file);
+            configUtils.buildTexts();
         } else {
-            config = YamlConfiguration.loadConfiguration(this.file);
-            this.configUtils.buildTexts();
+            config = YamlConfiguration.loadConfiguration(file);
+            configUtils.buildTexts();
         }
-        if (!this.dataFile.exists()) {
-            this.plugin.saveResource("data.yml", false);
-            data = YamlConfiguration.loadConfiguration(this.dataFile);
-            this.plugin.getLogger().info("Successfully created and loaded data.yml file!");
+        if (!dataFile.exists()) {
+            plugin.saveResource("data.yml", false);
+            data = YamlConfiguration.loadConfiguration(dataFile);
+            plugin.getLogger().info("Successfully created and loaded data.yml file!");
         } else {
-            data = YamlConfiguration.loadConfiguration(this.dataFile);
+            data = YamlConfiguration.loadConfiguration(dataFile);
         }
     }
 
@@ -97,7 +80,6 @@ public class DataUtils {
     }
 
     public Location getPlayerHome(Player player, String homeName) {
-        this.configUtils = new ConfigUtils(this);
         if (data.getConfigurationSection(player.getName() + "." + homeName) != null) {
             if (Bukkit.getWorld(data.getString(player.getName() + "." + homeName + ".world")) != null)
                 return new Location(
@@ -105,8 +87,8 @@ public class DataUtils {
                         .getDouble(player.getName() + "." + homeName + ".x"), data
                         .getDouble(player.getName() + "." + homeName + ".y"), data
                         .getDouble(player.getName() + "." + homeName + ".z"),
-                        (float)data.getLong(player.getName() + "." + homeName + ".yaw"),
-                        (float)data.getLong(player.getName() + "." + homeName + ".pitch"));
+                        data.getLong(player.getName() + "." + homeName + ".yaw"),
+                        data.getLong(player.getName() + "." + homeName + ".pitch"));
             return null;
         }
         return null;

@@ -4,11 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="327913e3-2a53-4223-8a96-3585a1614612" name="Changes" comment="Update" />
+    <list default="true" id="327913e3-2a53-4223-8a96-3585a1614612" name="Changes" comment="Update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/Homes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/Homes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Accept.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Accept.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Delhome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Delhome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/ReloadCmd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/ReloadCmd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Sethome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/Sethome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/ShowHomes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/commands/ShowHomes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/dependencies/PlotSquaredAdditionalHomes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/dependency/PlotSquaredHook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/dependencies/Worldguard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/dependency/WorldGuardHook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/utils/ConfigUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/utils/ConfigUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/minerail/homes/utils/DataUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/minerail/homes/utils/DataUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/Homes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/Homes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Accept.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Accept.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Delhome.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Delhome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Home.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Home.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/ReloadCmd.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/ReloadCmd.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Request.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Sethome.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/Sethome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/ShowHomes.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/commands/ShowHomes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/dependencies/PlotSquaredAdditionalHomes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/dependencies/Worldguard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/utils/ConfigUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/utils/ConfigUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/minerail/homes/utils/DataUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/minerail/homes/utils/DataUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-Homes-1.0-BETA.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-Homes-1.0-BETA.jar" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" show_ignored="true">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="module" />
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -17,13 +56,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="workOffline" value="true" />
-      </MavenGeneralSettings>
-    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -36,22 +68,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Maven.Homes [clean,,package].executor": "Run",
-    "Maven.Homes [clean,package].executor": "Run",
-    "Maven.Homes [clean].executor": "Run",
-    "Maven.Homes [compile].executor": "Run",
-    "Maven.Homes [install].executor": "Run",
-    "Maven.Homes [package].executor": "Run",
-    "Maven.Homes package.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "<unknown>",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Maven.Homes [clean,,package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Homes [clean,package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Homes [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Homes [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Homes [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Homes [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Homes package.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Marcin/IdeaProjects/Homes&quot;
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean, package" />

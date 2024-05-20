@@ -1,13 +1,13 @@
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\commands\Request.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\commands\Home.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\Homes.java
+C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\dependency\WorldGuardHook.java
+C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\dependency\PlotSquaredHook.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\utils\ConfigUtils.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\utils\DataUtils.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\commands\ReloadCmd.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\commands\Sethome.java
-C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\dependencies\PlotSquaredAdditionalHomes.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\utils\HomesGui.java
-C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\dependencies\Worldguard.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\commands\Delhome.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\commands\ShowHomes.java
 C:\Users\Marcin\IdeaProjects\Homes\src\main\java\com\minerail\homes\commands\Accept.java

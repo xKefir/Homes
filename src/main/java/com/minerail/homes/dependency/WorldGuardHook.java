@@ -1,6 +1,5 @@
-package com.minerail.homes.dependencies;
+package com.minerail.homes.dependency;
 
-import com.minerail.homes.commands.Sethome;
 import com.minerail.homes.utils.DataUtils;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
@@ -13,27 +12,22 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-public class Worldguard {
-    public static Plugin plugin = Bukkit.getPluginManager().getPlugin("Homes");
-
-    private DataUtils dataUtils;
-
-    private static String secure;
-
-    public Worldguard(Sethome sethome) {}
+public class WorldGuardHook {
+    public WorldGuardHook(){}
+    private final DataUtils dataUtils = new DataUtils();
+    public Plugin plugin = Bukkit.getPluginManager().getPlugin("Homes");
 
     public boolean isPlayerInRegion(Player player) {
-        this.dataUtils = new DataUtils(this);
-        secure = DataUtils.config.getString("Settings.WorldGuard.secure-type");
+        String secure = dataUtils.config.getString("Settings.WorldGuard.secure-type");
         boolean ignored = false;
         Location playerLocation = player.getLocation();
         RegionManager regionManager = getRegionManager(player.getWorld());
-        if (regionManager != null)
+        if (regionManager != null) {
             for (ProtectedRegion region : regionManager.getRegions().values()) {
                 if (region.contains(BukkitAdapter.asBlockVector(playerLocation))) {
                     if (!player.hasPermission("homes.admin.bypass")) {
                         if (secure.equals("PROTECTIONSTONES")) {
-                            for (String ignoredRegions : DataUtils.config.getStringList("Settings.WorldGuard.regions.ignored-regions")) {
+                            for (String ignoredRegions : dataUtils.config.getStringList("Settings.WorldGuard.regions.ignored-regions")) {
                                 if (region.getId().equals(ignoredRegions)) {
                                     ignored = true;
                                     break;
@@ -71,7 +65,7 @@ public class Worldguard {
                     return true;
                 }
             }
-        return false;
+        }return false;
     }
 
     private static RegionManager getRegionManager(World world) {
