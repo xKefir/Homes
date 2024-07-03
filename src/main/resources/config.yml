@@ -3,6 +3,8 @@ Main-Settings:
     enabled: true
     #Called in ticks. Max 600 ticks = 30 seconds
     time-to-teleport: 60
+    #Requires permission: homes.delay.bypass
+    bypass-for-admins: true
 
   Commands:
     Request:
@@ -15,13 +17,14 @@ Gui:
   show: true
   #You need to specify the amount of rows.
   size: 1
+  title: 'You can use Legacy or MiniMessage colors input type.'
+  item-name-color: '&r&c&l<name>'
   Materials:
     #Plugin will automatically select a random material to specified home.
     random: false
     #Custom - One material type to all homes in gui
     custom:
-      material: FEATHER
-      enabled: true
+      material: 'FEATHER'
 
 Limits:
   #If true, player need permission. - Example: homes.limit.2
@@ -38,6 +41,17 @@ Limits:
 Hooks:
   WorldGuard:
     enabled: false
+    bypass-for-admins: true
+    #PROTECTIONSTONES = Choosing this you can block uninvited guests from setting homes on players plots and checking ignored-regions
+    #DEFAULT = It's checking only blacklisted-regions and whitelisted-regions
+    secure-type: DEFAULT
+    whitelisted-regions:
+      - 'example'
+    blacklisted-regions:
+      - 'example'
+    #Only in PROTECTIONSTONES secure type
+    ignored-regions:
+      - 'example'
 
   PlotSquared:
     enabled: false

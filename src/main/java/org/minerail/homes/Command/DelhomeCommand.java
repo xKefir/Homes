@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.minerail.homes.File.Message.MessageKey;
 import org.minerail.homes.File.Message.MessageProvider;
-import org.minerail.homes.File.PlayerData;
+import org.minerail.homes.File.PlayerData.PlayerData;
 
 public class DelhomeCommand implements CommandExecutor {
 
@@ -17,7 +17,7 @@ public class DelhomeCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            if (args.length != 0) {
+            if (args.length != 0 && args.length != 2) {
                 if (PlayerData.get(player).getHome(args[0]) != null) {
                     PlayerData.get(player).removeHome(args[0]);
                     player.sendMessage(MessageProvider.get(MessageKey.DELETE_SUCCESS,
@@ -41,10 +41,9 @@ public class DelhomeCommand implements CommandExecutor {
                 }
             } else {
                 player.sendMessage(MessageProvider.get(MessageKey.COMMAND_MISSING_ARGUMENT,
-                                Placeholder.component(
-                                        "prefix", MessageProvider.get(MessageKey.PREFIX)
-                                )
-                        )
+                        Placeholder.component(
+                                "prefix", MessageProvider.get(MessageKey.PREFIX)
+                        ))
                 );
                 return true;
             }

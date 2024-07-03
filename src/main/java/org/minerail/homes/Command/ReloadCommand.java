@@ -23,26 +23,26 @@ public class ReloadCommand implements CommandExecutor {
                 try {
                     Homes.reloadAll();
                     player.sendMessage(MessageProvider.get(MessageKey.RELOAD_SUCCESS,
-                                Placeholder.component(
-                                    "prefix", MessageProvider.get(MessageKey.PREFIX)
-                                )
+                                    Placeholder.component(
+                                            "prefix", MessageProvider.get(MessageKey.PREFIX)
+                                    )
                             )
                     );
                     return true;
                 } catch (Exception e) {
                     player.sendMessage(MessageProvider.get(MessageKey.RELOAD_FAILED,
-                                Placeholder.component(
-                                        "prefix", MessageProvider.get(MessageKey.PREFIX)
-                                )
+                                    Placeholder.component(
+                                            "prefix", MessageProvider.get(MessageKey.PREFIX)
+                                    )
                             )
                     );
                     return true;
                 }
             } else {
                 player.sendMessage(MessageProvider.get(MessageKey.MISSING_PERMISSION,
-                            Placeholder.component(
-                                "prefix",MessageProvider.get(MessageKey.PREFIX)
-                            )
+                                Placeholder.component(
+                                        "prefix", MessageProvider.get(MessageKey.PREFIX)
+                                )
                         )
                 );
                 return true;

@@ -1,4 +1,4 @@
-package org.minerail.homes.File;
+package org.minerail.homes.File.PlayerData;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -50,6 +50,7 @@ public class PlayerData implements Listener {
         }
         return PLAYER_DATA_MAP.get(player.getUniqueId());
     }
+
     private Player getPlayer() {
         return Bukkit.getPlayer(player);
     }
@@ -69,6 +70,7 @@ public class PlayerData implements Listener {
     public Location getHome(String name) {
         return homeMap.get(name);
     }
+
     public Set<String> getHomes() {
         return homeMap.keySet();
     }
@@ -76,15 +78,6 @@ public class PlayerData implements Listener {
     public void removeHome(String name) {
         conf.set("homes." + name, null);
         homeMap.remove(name);
-    }
-
-    public boolean checkLimit() {
-        for (int i = 0; i < Config.getInt(ConfigKeys.LIMITS_MAX_REPETITIONS); i++) {
-            if (getPlayer().hasPermission("homes.limit." + i)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void save() {

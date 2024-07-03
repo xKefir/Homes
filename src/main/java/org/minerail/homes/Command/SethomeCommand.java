@@ -9,7 +9,8 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.minerail.homes.File.Message.MessageKey;
 import org.minerail.homes.File.Message.MessageProvider;
-import org.minerail.homes.File.PlayerData;
+import org.minerail.homes.File.PlayerData.PlayerData;
+import org.minerail.homes.Util.PlayerUtil;
 
 public class SethomeCommand implements CommandExecutor {
 
@@ -17,11 +18,11 @@ public class SethomeCommand implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            if (args.length != 0) {
+            if (args.length != 0 && args.length != 2) {
                 if (!PlayerData.get(player).hasHome(args[0])) {
-                    if (!PlayerData.get(player).checkLimit()) {
+                    if (!PlayerUtil.get(player).checkLimit()) {
                         player.sendMessage(MessageProvider.get(MessageKey.SETHOME_LIMIT_WAS_REACHED,
-                                Placeholder.component("prefix", MessageProvider.get(MessageKey.PREFIX))
+                                        Placeholder.component("prefix", MessageProvider.get(MessageKey.PREFIX))
                                 )
                         );
                         return true;
@@ -35,8 +36,8 @@ public class SethomeCommand implements CommandExecutor {
                     return true;
                 } else {
                     player.sendMessage(MessageProvider.get(MessageKey.SETHOME_HOME_ALREADY_EXISTS,
-                            Placeholder.component("prefix", MessageProvider.get(MessageKey.PREFIX))
-                        )
+                                    Placeholder.component("prefix", MessageProvider.get(MessageKey.PREFIX))
+                            )
                     );
                     return true;
                 }

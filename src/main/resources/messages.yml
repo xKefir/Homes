@@ -4,13 +4,12 @@ LANGUAGE: polish
 #Available placeholders
 #<input> - first argument of command
 #<homes> - returns the list of player's homes
-#
 
 prefix: '&#4ed4ff&lM&#51bdf5&li&#55a5eb&ln&#588ee1&le&#5b77d8&lR&#5e60ce&la&#6248c4&li&#6531ba&ll &f'
 
 command:
   error:
-    missing-argument: '<prefix>&cMusisz wprowadzić nazwę domu lub gracza.'
+    missing-argument: '<prefix>&cMusisz wprowadzić prawidłowo nazwę domu lub gracza.'
     missing-permission: '<prefix>&cBrak uprawnień.'
   sethome:
     already-exists: '<prefix>&cWprowadzony dom już istnieje, spróbuj nazwać go inaczej.'

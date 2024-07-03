@@ -9,12 +9,13 @@ public class MessageProviderLoader {
 
     private static YamlConfiguration messages;
 
-    public static void create() {
-        Homes.get().saveResource("messages.yml", false);
-    }
-
     public static void reload() {
-        messages = YamlConfiguration.loadConfiguration(new File(Homes.get().getDataFolder().toPath() + "/messages.yml"));
+        File msg1 = new File(Homes.get().getDataFolder().toPath() + "/messages.yml");
+        if (!msg1.exists()) {
+            Homes.get().saveResource("messages.yml", false);
+        }
+        messages = YamlConfiguration.loadConfiguration(msg1);
+
     }
 
     public static String getString(String path) {
