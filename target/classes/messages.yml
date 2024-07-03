@@ -1,0 +1,36 @@
+#You can change the color serializer to MINIMESSAGE or LEGACY
+input-type: 'LEGACY'
+LANGUAGE: polish
+#Available placeholders
+#<input> - first argument of command
+#<homes> - returns the list of player's homes
+#
+
+prefix: '&#4ed4ff&lM&#51bdf5&li&#55a5eb&ln&#588ee1&le&#5b77d8&lR&#5e60ce&la&#6248c4&li&#6531ba&ll &f'
+
+command:
+  error:
+    missing-argument: '<prefix>&cMusisz wprowadzić nazwę domu lub gracza.'
+    missing-permission: '<prefix>&cBrak uprawnień.'
+  sethome:
+    already-exists: '<prefix>&cWprowadzony dom już istnieje, spróbuj nazwać go inaczej.'
+    create-success: '<prefix>Utworzono: &b<input>'
+    limit-reached: '<prefix>&cLimit domów został już osiągnięty! Polecenie anulowane.'
+  delhome:
+    delete-success: '<prefix>Pomyślnie usunięto: &b<input>'
+    delete-failed-invalid-home: '<prefix>&cWprowadzona nazwa domu nie istnieje, upewnij się że posiadasz taki dom.'
+  home:
+    teleport-success: '<prefix>Zostałeś/aś przeteleportowany/a do: &b<input>'
+    teleport-failed-moved: '<prefix>&cTeleportacja została anulowana, ruszyłeś/aś się.'
+    teleport-failed-invalid-home: '<prefix>&cWprowadzona nazwa domu nie istnieje.'
+    teleport-delayed: '<prefix>Nie ruszaj się, oczekiwanie na teleportacje..'
+  homes:
+    show: '<prefix>Twoje domy: &b<homes>'
+    gui-opened: '<prefix>Otwarto interfejs listy domów.'
+    empty: '<prefix>Nie masz obecnie jakiegokolwiek ustawionego domu.'
+  reload:
+    reload-success: '<prefix>Pomyślnie przeładowano konfiguracje.'
+    reload-failed: '<prefix>Nie udało się przeładować konfiguracji, zobacz błąd w konsoli.'
+
+#Don't change this value!
+messages-version: 1.0

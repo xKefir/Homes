@@ -1,0 +1,11 @@
+name: Homes
+version: '${project.version}'
+main: org.minerail.homes.Homes
+api-version: '1.20'
+author: x_Kefir
+commands:
+  home:
+  delhome:
+  sethome:
+  homes:
+  hreload:
