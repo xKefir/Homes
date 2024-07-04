@@ -8,21 +8,14 @@ import org.minerail.homes.File.Message.MessageKey;
 import org.minerail.homes.File.Message.MessageProviderLoader;
 
 public class TextFormatUtil {
-    private static String input;
-    private TextFormatUtil(String input) {
-        this.input = input;
-    }
 
-    public static TextFormatUtil get(String input) {
-        return new TextFormatUtil(input);
-    }
-    public Component format(TagResolver... resolvers) {
+    public static Component format(String input, TagResolver... resolvers) {
         if (MessageProviderLoader.getString(MessageKey.INPUT_TYPE.getPath()).equals("LEGACY")) {
             return LegacyComponentSerializer.legacyAmpersand().deserialize(
                     LegacyComponentSerializer.legacyAmpersand().serialize(
-                            MiniMessage.builder().build().deserialize(this.input, resolvers))
+                            MiniMessage.builder().build().deserialize(input, resolvers))
             );
         }
-        return MiniMessage.miniMessage().deserialize(this.input, resolvers);
+        return MiniMessage.miniMessage().deserialize(input, resolvers);
     }
 }

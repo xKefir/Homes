@@ -25,10 +25,10 @@ public class HomeCommand implements CommandExecutor {
                 if (PlayerData.get(player).getHome(args[0]) != null) {
                     if (Config.getBoolean(ConfigKeys.TELEPORT_DELAY_IS_ENABLED)) {
                         FinePosition finePosition = Position.fine(player.getLocation());
-                        PlayerUtil.get(player).runDelayedTeleport(finePosition, args[0]);
+                        PlayerUtil.runDelayedTeleport(player, finePosition, args[0]);
                         return true;
                     } else {
-                        PlayerUtil.get(player).teleportToHome(args[0]);
+                        PlayerUtil.teleportToHome(player, args[0]);
                         return true;
                     }
                 } else {

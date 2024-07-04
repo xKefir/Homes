@@ -37,7 +37,7 @@ public class HomesInventory {
 
     private void buildGui() {
         homesInv = Gui.gui()
-                .title(TextFormatUtil.get(Config.getString(ConfigKeys.GUI_TITLE)).format())
+                .title(TextFormatUtil.format(Config.getString(ConfigKeys.GUI_TITLE)))
                 .rows(Config.getInt(ConfigKeys.GUI_SIZE))
                 .type(GuiType.CHEST)
                 .disableAllInteractions()
@@ -45,23 +45,23 @@ public class HomesInventory {
     }
 
     private void buildIcons() {
-        for (String name : PlayerData.get(this.player).getHomes()) {
+        for (String name : PlayerData.get(player).getHomes()) {
             GuiItem item = ItemBuilder.from(
                     getMaterial())
-                    .name(TextFormatUtil
-                            .get(Config.getString(ConfigKeys.GUI_ITEM_COLOR_OF_NAME))
-                            .format(Placeholder.component("name", Component.text(name)))
+                    .name(TextFormatUtil.format(Config.getString(ConfigKeys.GUI_ITEM_COLOR_OF_NAME),
+                            Placeholder.component("name", Component.text(name)))
                     )
                     .flags(ItemFlag.HIDE_ATTRIBUTES)
                     .asGuiItem(e -> {
                         if (!Config.getBoolean(ConfigKeys.TELEPORT_DELAY_IS_ENABLED)) {
-                            PlayerUtil.get(this.player).teleportToHome(name);
+                            PlayerUtil.teleportToHome(player, name);
                         } else {
                             FinePosition finePosition = Position.fine(player.getLocation());
-                            PlayerUtil.get(this.player).runDelayedTeleport(finePosition, name);
+                            PlayerUtil.runDelayedTeleport(player, finePosition, name);
                         }
                         Homes.get().getLogger().info(player.getName() + " Teleported to home: " + name);
             });
+
             homesInv.addItem(item);
         }
     }
@@ -79,7 +79,7 @@ public class HomesInventory {
             do {
                 int index = random.nextInt(materials.length);
                 randomMaterial = materials[index];
-            } while (!randomMaterial.isBlock());
+            } while (!randomMaterial.isItem() && !randomMaterial.isAir());
 
             return randomMaterial;
         } else {

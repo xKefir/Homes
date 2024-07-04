@@ -8,8 +8,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.minerail.homes.File.Config.Config;
-import org.minerail.homes.File.Config.ConfigKeys;
 import org.minerail.homes.Homes;
 
 import java.io.File;
@@ -72,7 +70,8 @@ public class PlayerData implements Listener {
     }
 
     public Set<String> getHomes() {
-        return homeMap.keySet();
+        Set<String> homeSet = homeMap.keySet();
+        return new TreeSet<>(homeSet);
     }
 
     public void removeHome(String name) {
@@ -81,22 +80,17 @@ public class PlayerData implements Listener {
     }
 
     public void save() {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                ConfigurationSection homesSection = conf.createSection("homes");
-                homeMap.forEach((name, location) -> {
-                    ConfigurationSection section = homesSection.createSection(name);
-                    serializeLocation(section, location);
-                });
+        ConfigurationSection homesSection = conf.createSection("homes");
+        homeMap.forEach((name, location) -> {
+            ConfigurationSection section = homesSection.createSection(name);
+            serializeLocation(section, location);
+        });
 
-                try {
-                    conf.save(playerDataFile);
-                } catch (IOException e) {
-                    Homes.get().getLogger().warning(e.getMessage());
-                }
-            }
-        }.runTaskAsynchronously(Homes.get());
+        try {
+            conf.save(playerDataFile);
+        } catch (IOException e) {
+            Homes.get().getLogger().warning(e.getMessage());
+        }
     }
 
     public static void saveAll() {

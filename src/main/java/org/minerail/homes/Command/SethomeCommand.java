@@ -20,7 +20,7 @@ public class SethomeCommand implements CommandExecutor {
             Player player = (Player) commandSender;
             if (args.length != 0 && args.length != 2) {
                 if (!PlayerData.get(player).hasHome(args[0])) {
-                    if (!PlayerUtil.get(player).checkLimit()) {
+                    if (!PlayerUtil.checkLimit(player)) {
                         player.sendMessage(MessageProvider.get(MessageKey.SETHOME_LIMIT_WAS_REACHED,
                                         Placeholder.component("prefix", MessageProvider.get(MessageKey.PREFIX))
                                 )

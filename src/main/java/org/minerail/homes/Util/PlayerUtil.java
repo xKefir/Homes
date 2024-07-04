@@ -14,17 +14,7 @@ import org.minerail.homes.Homes;
 
 
 public class PlayerUtil {
-    private static Player player;
-
-    private PlayerUtil(Player player) {
-        this.player = player;
-    }
-
-    public static PlayerUtil get(Player player) {
-        return new PlayerUtil(player);
-    }
-
-    public void teleportToHome(String args) {
+    public static void teleportToHome(Player player, String args) {
         player.teleport(PlayerData.get(player).getHome(args));
         player.sendMessage(MessageProvider.get(MessageKey.HOME_TELEPORT_SUCCESS,
                         Placeholder.component(
@@ -36,7 +26,7 @@ public class PlayerUtil {
                 )
         );
     }
-    public boolean checkLimit() {
+    public static boolean checkLimit(Player player) {
         if (player.hasPermission("homes.limit.bypass") &&
                 Config.getBoolean(ConfigKeys.LIMITS_BYPASS_FOR_ADMINS) &&
                 Config.getBoolean(ConfigKeys.MODULE_LIMITS_IS_ENABLED)) {
@@ -55,22 +45,32 @@ public class PlayerUtil {
         }
         return false;
     }
-    public void runDelayedTeleport(FinePosition finePosition, String args) {
-        player.sendMessage(MessageProvider.get(MessageKey.HOME_TELEPORT_DELAYED,
-                        Placeholder.component("prefix", MessageProvider.get(MessageKey.PREFIX))
-                )
-        );
-        Homes.get().getServer().getScheduler().runTaskLater(Homes.get(), () -> {
-            if (finePosition.equals(Position.fine(player.getLocation()))) {
-                PlayerUtil.get(player).teleportToHome(args);
-            } else {
-                player.sendMessage(MessageProvider.get(MessageKey.HOME_TELEPORT_FAILED_MOVED,
-                                Placeholder.component(
-                                        "prefix", MessageProvider.get(MessageKey.PREFIX)
-                                )
-                        )
-                );
-            }
-        }, Config.getInt(ConfigKeys.TELEPORT_DELAY_TIME_TO_TELEPORT));
+    public static void runDelayedTeleport(Player player, FinePosition finePosition, String args) {
+        if (checkPermsission(player, "homes.delay.bypass") && Config.getBoolean(ConfigKeys.TELEPORT_BYPASS_ADMIN)) {
+            teleportToHome(player, args);
+        } else {
+            player.sendMessage(MessageProvider.get(MessageKey.HOME_TELEPORT_DELAYED,
+                            Placeholder.component("prefix", MessageProvider.get(MessageKey.PREFIX))
+                    )
+            );
+            Homes.get().getServer().getScheduler().runTaskLater(Homes.get(), () -> {
+                if (finePosition.equals(Position.fine(player.getLocation()))) {
+                    PlayerUtil.teleportToHome(player, args);
+                } else {
+                    player.sendMessage(MessageProvider.get(MessageKey.HOME_TELEPORT_FAILED_MOVED,
+                                    Placeholder.component(
+                                            "prefix", MessageProvider.get(MessageKey.PREFIX)
+                                    )
+                            )
+                    );
+                }
+            }, Config.getInt(ConfigKeys.TELEPORT_DELAY_TIME_TO_TELEPORT));
+        }
+    }
+    private static boolean checkPermsission(Player player, String permission) {
+        if (player.hasPermission(permission)) {
+            return true;
+        }
+        return false;
     }
 }
